@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About Hot Dog Hell — Orlando's premier mobile gourmet hot dog experience, founded by Derek Wolf and Taylor Grafton in 2026.">
+  <title>About | Hot Dog Hell</title>
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .founders-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .founder-card {
+      background: var(--hell-dark);
+      border: 1px solid rgba(92,40,0,0.5);
+      border-top: 3px solid var(--hell-orange);
+      padding: 2.5rem;
+    }
+
+    .founder-initials {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--hell-red), var(--hell-orange));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: var(--hell-white);
+      margin-bottom: 1.25rem;
+    }
+
+    .founder-name {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      color: var(--hell-gold);
+      margin-bottom: 0.25rem;
+      line-height: 1;
+    }
+
+    .founder-title {
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--hell-orange);
+      margin-bottom: 1.25rem;
+    }
+
+    .founder-bio {
+      font-size: 0.9rem;
+      color: var(--hell-cream);
+      opacity: 0.8;
+      line-height: 1.8;
+      max-width: none;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .value-card {
+      padding: 2rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(92,40,0,0.4);
+      text-align: center;
+      transition: all var(--transition);
+    }
+
+    .value-card:hover {
+      border-color: var(--hell-orange);
+      background: rgba(232,93,4,0.05);
+      transform: translateY(-4px);
+    }
+
+    .value-icon {
+      font-size: 2.5rem;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .value-title {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      color: var(--hell-gold);
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+
+    .value-text {
+      font-size: 0.85rem;
+      color: var(--hell-cream);
+      opacity: 0.7;
+      line-height: 1.7;
+      max-width: none;
+    }
+
+    .timeline {
+      position: relative;
+      margin-top: 3rem;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--hell-orange), var(--hell-red), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+      padding-left: 2rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.4rem;
+      top: 0.4rem;
+      width: 10px;
+      height: 10px;
+      background: var(--hell-orange);
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(232,93,4,0.6);
+    }
+
+    .timeline-date {
+      font-family: var(--font-heading);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--hell-orange);
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--hell-gold);
+      margin-bottom: 0.4rem;
+      line-height: 1.1;
+    }
+
+    .timeline-desc {
+      font-size: 0.88rem;
+      color: var(--hell-cream);
+      opacity: 0.7;
+      line-height: 1.7;
+      max-width: 600px;
+    }
+
+    @media (max-width: 700px) {
+      .founders-grid { grid-template-columns: 1fr; }
+      .values-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ── -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/images/logo.png" alt="Hot Dog Hell Logo">
+      <div class="nav-logo-text">
+        Hot Dog Hell
+        <span>Est. 2026 · Orlando, FL</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="challenge.html">The Challenge</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Find Us</a></li>
+      <li><a href="challenge.html" class="nav-cta">Accept the Challenge</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-nav">
+    <a href="index.html">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="challenge.html">The Challenge</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Find Us</a>
+  </div>
+
+  <!-- ── PAGE HERO ── -->
+  <div class="page-hero">
+    <p class="section-label">Our Story</p>
+    <h1 class="section-title" style="font-size: clamp(3rem, 8vw, 7rem);">About Us</h1>
+    <p style="color: var(--hell-cream); opacity:0.7; font-family: var(--font-heading); letter-spacing:0.15em; font-size:0.9rem; text-transform:uppercase; margin: 0.75rem auto 0;">Born in Orlando · Forged in Fire · Fueled by Flavor</p>
+  </div>
+
+  <!-- ── STORY ── -->
+  <section class="about-section">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-image-wrap fade-up">
+          <img src="assets/images/logo.png" alt="Hot Dog Hell Logo">
+        </div>
+        <div class="about-text fade-up">
+          <p class="section-label">How It Started</p>
+          <h2 class="section-title">The Origin<br>Story</h2>
+          <div class="section-divider"></div>
+          <p>Hot Dog Hell started the way the best businesses do — with a stupid idea and enough stubbornness to see it through. Derek and Taylor had been arguing for years about whether a hot dog could be "fine dining." The bet: put real craft and technique into a mobile hot dog cart and see if people would pay for quality.</p>
+          <p>Turns out, they would. And they'd also voluntarily sign a legal waiver and eat something that could technically be classified as a controlled substance by heat index.</p>
+          <p>We launched in Orlando in 2026 as a Florida LLC with equal 50/50 ownership, a $250,000 investment, and a trailer that we absolutely spent too much money on. We hit festivals, markets, private events, and regular weekly spots across Central Florida.</p>
+          <p>The Grim Weeper challenge came later — after a late night and a dare that neither founder will officially take credit for proposing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOUNDERS ── -->
+  <section style="background: var(--hell-black); padding: 6rem 2rem;">
+    <div class="section-inner">
+      <p class="section-label fade-up" style="text-align:center;">The Team</p>
+      <h2 class="section-title fade-up" style="text-align:center;">The Founders</h2>
+      <div class="section-divider fade-up" style="margin: 0 auto 1rem;"></div>
+
+      <div class="founders-grid stagger-children">
+
+        <div class="founder-card">
+          <div class="founder-initials">DW</div>
+          <div class="founder-name">Derek Wolf</div>
+          <div class="founder-title">Co-Founder · 50% Member</div>
+          <p class="founder-bio">Derek brings the legal mind and the culinary obsession to Hot Dog Hell. A law student at Barry University's Dwayne O. Andreas School of Law, he drafted the LLC operating agreement, the employee contracts, the spicy dog waiver, and then promptly ate the thing the waiver was written about. He handles vendor relationships, recipe development, and anything involving contracts, compliance, or arguing with Taylor about whether the pretzel bun was a mistake (it wasn't).</p>
+        </div>
+
+        <div class="founder-card">
+          <div class="founder-initials">TG</div>
+          <div class="founder-name">Taylor Grafton</div>
+          <div class="founder-title">Co-Founder · 50% Member</div>
+          <p class="founder-bio">Taylor is the operations engine of Hot Dog Hell. With a background in food service management and an obsession with logistics that borders on clinical, Taylor makes sure the trailer is where it needs to be, the supply chain is locked in, and every dog that leaves the cart meets the quality standard they've both agreed to hold the line on. Taylor also runs social media and, against Derek's advice, started the challenge.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── VALUES ── -->
+  <section style="background: var(--hell-dark); padding: 6rem 2rem;">
+    <div class="section-inner">
+      <p class="section-label fade-up" style="text-align:center;">What We Stand For</p>
+      <h2 class="section-title fade-up" style="text-align:center;">Our Values</h2>
+      <div class="section-divider fade-up" style="margin: 0 auto 1rem;"></div>
+
+      <div class="values-grid stagger-children">
+
+        <div class="value-card">
+          <span class="value-icon">🔥</span>
+          <div class="value-title">Quality Over Everything</div>
+          <p class="value-text">We source quality ingredients, use real techniques, and don't cut corners. A hot dog on a brioche bun with house-made aioli and fresh slaw is fundamentally different from a tube of mystery meat on a steamed white bun. We believe that.</p>
+        </div>
+
+        <div class="value-card">
+          <span class="value-icon">🤝</span>
+          <div class="value-title">Honesty & Transparency</div>
+          <p class="value-text">Our menu tells you exactly what's in your food. Our waiver tells you exactly what you're agreeing to. Our employees know exactly what their contracts say. We don't hide the ball — especially when the ball is a Carolina Reaper pepper.</p>
+        </div>
+
+        <div class="value-card">
+          <span class="value-icon">🌶️</span>
+          <div class="value-title">Genuine Heat, Real Flavor</div>
+          <p class="value-text">We don't fake heat with food coloring and hype. Our spiciest items are built on actual pepper biology and careful flavor layering — so even the Grim Weeper has complexity before it destroys you.</p>
+        </div>
+
+        <div class="value-card">
+          <span class="value-icon">📋</span>
+          <div class="value-title">Doing It Right</div>
+          <p class="value-text">We're licensed, insured, and legally documented. Our operating agreement, employee contracts, and challenge waivers were drafted from scratch. We take running a proper business as seriously as we take our pepper sourcing.</p>
+        </div>
+
+        <div class="value-card">
+          <span class="value-icon">🏙️</span>
+          <div class="value-title">Community First</div>
+          <p class="value-text">We're an Orlando business through and through. We hire locally, source locally where possible, attend community events, and plan to be part of the fabric of Central Florida — not just a flash in the pan.</p>
+        </div>
+
+        <div class="value-card">
+          <span class="value-icon">😈</span>
+          <div class="value-title">Have Fun With It</div>
+          <p class="value-text">At the end of the day, we're selling hot dogs from a trailer and running a challenge that makes grown adults weep. We don't take ourselves too seriously. Life's too short for bad food and no spice.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TIMELINE ── -->
+  <section style="background: var(--hell-black); padding: 6rem 2rem;">
+    <div class="section-inner">
+      <p class="section-label fade-up">The Journey</p>
+      <h2 class="section-title fade-up">Our Timeline</h2>
+      <div class="section-divider fade-up"></div>
+
+      <div class="timeline fade-up" style="max-width:700px;">
+        <div class="timeline-item">
+          <div class="timeline-date">Late 2025</div>
+          <div class="timeline-title">The Idea Ignites</div>
+          <p class="timeline-desc">Derek and Taylor start seriously planning Hot Dog Hell. Menus are drafted on napkins. The LLC name is registered. Derek begins drafting the operating agreement, and Taylor begins sourcing trailers.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Early 2026</div>
+          <div class="timeline-title">Hot Dog Hell, LLC is Born</div>
+          <p class="timeline-desc">Articles of Organization filed with the Florida Department of State. Operating agreement signed. $250,000 in initial capital committed equally by both founders. The business is officially real.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Spring 2026</div>
+          <div class="timeline-title">The Cart Hits the Streets</div>
+          <p class="timeline-desc">Hot Dog Hell opens for business at Orlando-area markets and events. The Inferno Classic becomes an instant favorite. People start asking what the spiciest thing on the menu is.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Spring 2026</div>
+          <div class="timeline-title">The Grim Weeper is Born</div>
+          <p class="timeline-desc">A late-night recipe experiment leads to the challenge dog. Derek writes the waiver over a weekend. Taylor designs the flyer. The Grim Weeper is unleashed on an unsuspecting public.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Now</div>
+          <div class="timeline-title">Growing the Inferno</div>
+          <p class="timeline-desc">New menu items, expanded event presence across Central Florida, and a growing Wall of Flames. The mission remains the same: serve the best hot dog you've ever had, and maybe the most painful one too.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="assets/images/logo.png" alt="Hot Dog Hell">
+          <p>Orlando's premier mobile gourmet hot dog experience. Born in fire, served with pride.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="challenge.html">The Challenge</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Find Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Follow the Heat</h4>
+          <ul>
+            <li><a href="#">@HotDogHell (Instagram)</a></li>
+            <li><a href="#">@HotDogHell (TikTok)</a></li>
+            <li><a href="#">HotDogHell.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copyright">© 2026 Hot Dog Hell, LLC. All rights reserved. Orlando, FL.</span>
+        <span class="footer-tagline">🔥 Dare to Enter the Inferno</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

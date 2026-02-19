@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Find Hot Dog Hell — Orlando mobile food truck schedule, events, and contact information.">
+  <title>Find Us | Hot Dog Hell</title>
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .schedule-table th {
+      font-family: var(--font-heading);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--hell-orange);
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(92,40,0,0.5);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .schedule-table td {
+      padding: 1rem;
+      border-bottom: 1px solid rgba(92,40,0,0.2);
+      color: var(--hell-cream);
+      vertical-align: middle;
+    }
+
+    .schedule-table tr:hover td {
+      background: rgba(232,93,4,0.05);
+    }
+
+    .schedule-table td:first-child {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      color: var(--hell-gold);
+    }
+
+    .event-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      background: rgba(232,93,4,0.2);
+      border: 1px solid rgba(232,93,4,0.3);
+      font-family: var(--font-heading);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--hell-orange);
+      border-radius: 2px;
+    }
+
+    .event-badge.challenge { background: rgba(204,17,0,0.2); border-color: rgba(204,17,0,0.4); color: var(--hell-red-hot); }
+
+    .contact-form {
+      background: var(--hell-dark);
+      border: 1px solid rgba(92,40,0,0.5);
+      border-top: 3px solid var(--hell-orange);
+      padding: 2.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-label {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--hell-orange);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-select {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(92,40,0,0.5);
+      color: var(--hell-cream);
+      padding: 0.75rem 1rem;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color var(--transition);
+      border-radius: 0;
+      -webkit-appearance: none;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus,
+    .form-select:focus {
+      border-color: var(--hell-orange);
+      background: rgba(232,93,4,0.05);
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: var(--hell-cream);
+      opacity: 0.3;
+    }
+
+    .form-textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .form-select option {
+      background: var(--hell-dark);
+      color: var(--hell-cream);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-success {
+      display: none;
+      padding: 1rem;
+      background: rgba(0,200,100,0.1);
+      border: 1px solid rgba(0,200,100,0.3);
+      color: #7FFFD4;
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid rgba(92,40,0,0.3);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--hell-gold);
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-align: left;
+      padding: 1.25rem 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: color var(--transition);
+    }
+
+    .faq-question:hover { color: var(--hell-orange); }
+
+    .faq-chevron {
+      font-size: 0.75rem;
+      transition: transform var(--transition);
+      color: var(--hell-orange);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .faq-answer p {
+      padding-bottom: 1.25rem;
+      font-size: 0.9rem;
+      color: var(--hell-cream);
+      opacity: 0.8;
+      max-width: none;
+      line-height: 1.8;
+    }
+
+    .faq-item.open .faq-chevron { transform: rotate(90deg); }
+    .faq-item.open .faq-answer { max-height: 600px; }
+
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ── -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/images/logo.png" alt="Hot Dog Hell Logo">
+      <div class="nav-logo-text">
+        Hot Dog Hell
+        <span>Est. 2026 · Orlando, FL</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="challenge.html">The Challenge</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Find Us</a></li>
+      <li><a href="challenge.html" class="nav-cta">Accept the Challenge</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-nav">
+    <a href="index.html">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="challenge.html">The Challenge</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Find Us</a>
+  </div>
+
+  <!-- ── PAGE HERO ── -->
+  <div class="page-hero">
+    <p class="section-label">Track the Trailer</p>
+    <h1 class="section-title" style="font-size: clamp(3rem, 8vw, 7rem);">Find Us</h1>
+    <p style="color: var(--hell-cream); opacity:0.7; font-family: var(--font-heading); letter-spacing:0.15em; font-size:0.9rem; text-transform:uppercase; margin: 0.75rem auto 0;">Central Florida · Weekly Events · Private Bookings</p>
+  </div>
+
+  <!-- ── CONTACT INFO ── -->
+  <section class="contact-section">
+    <div class="section-inner">
+      <div class="contact-grid">
+
+        <!-- Contact Details -->
+        <div class="fade-up">
+          <p class="section-label">Get In Touch</p>
+          <h2 class="section-title">Contact Info</h2>
+          <div class="section-divider"></div>
+
+          <div class="contact-item">
+            <span class="contact-icon">📍</span>
+            <div>
+              <div class="contact-label">Base of Operations</div>
+              <p class="contact-value">Orlando, Florida<br><span style="font-size:0.85rem; opacity:0.6;">Mobile vendor — we come to you</span></p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <span class="contact-icon">🌐</span>
+            <div>
+              <div class="contact-label">Website</div>
+              <p class="contact-value">HotDogHell.com</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <span class="contact-icon">📱</span>
+            <div>
+              <div class="contact-label">Social Media</div>
+              <p class="contact-value">@HotDogHell on Instagram & TikTok<br><span style="font-size:0.85rem; opacity:0.6;">Follow for real-time location updates</span></p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <span class="contact-icon">📧</span>
+            <div>
+              <div class="contact-label">Email (Events & Bookings)</div>
+              <p class="contact-value">hello@hotdoghell.com</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <span class="contact-icon">🎪</span>
+            <div>
+              <div class="contact-label">Private Events & Bookings</div>
+              <p class="contact-value">Available for private events, corporate functions, weddings, festivals, and more. Use the form below or email directly.</p>
+            </div>
+          </div>
+
+          <div class="social-links" style="margin-top:1.5rem;">
+            <a href="#" class="social-link">📸 Instagram</a>
+            <a href="#" class="social-link">📹 TikTok</a>
+            <a href="#" class="social-link">📘 Facebook</a>
+          </div>
+        </div>
+
+        <!-- Map placeholder -->
+        <div class="fade-up">
+          <div class="map-placeholder">
+            <div class="map-icon">🗺️</div>
+            <h3 style="font-family:var(--font-display); font-size:1.5rem; color:var(--hell-gold); margin-bottom:0.5rem;">We're Mobile</h3>
+            <p>Hot Dog Hell doesn't have a fixed location — we bring the inferno to you. Follow us on Instagram and TikTok for daily location updates, or check our weekly schedule below.</p>
+            <a href="#" class="btn btn-ghost" style="margin-top:1rem;">📍 Follow for Live Updates</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SCHEDULE ── -->
+  <section style="background: var(--hell-dark); padding: 6rem 2rem;">
+    <div class="section-inner">
+      <p class="section-label fade-up">Regular Spots</p>
+      <h2 class="section-title fade-up">Weekly Schedule</h2>
+      <div class="section-divider fade-up"></div>
+      <p class="fade-up" style="color:var(--hell-cream); opacity:0.7; font-size:0.9rem; margin-bottom:0.5rem;">Our regular circuit — subject to change. Follow <strong style="color:var(--hell-orange);">@HotDogHell</strong> for same-day updates and special pop-ups.</p>
+
+      <div class="fade-up" style="overflow-x:auto;">
+        <table class="schedule-table">
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Time</th>
+              <th>Location</th>
+              <th>Area</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Wednesday</td>
+              <td>11am – 3pm</td>
+              <td>Audubon Park Garden Market</td>
+              <td>Orlando (Winter Park adjacent)</td>
+              <td><span class="event-badge">Weekly</span></td>
+            </tr>
+            <tr>
+              <td>Thursday</td>
+              <td>5pm – 9pm</td>
+              <td>Downtown Orlando — Church St. Corridor</td>
+              <td>Downtown Orlando</td>
+              <td><span class="event-badge">Weekly</span></td>
+            </tr>
+            <tr>
+              <td>Friday</td>
+              <td>11am – 3pm</td>
+              <td>UCF Area (Rotating Near Campus)</td>
+              <td>East Orlando</td>
+              <td><span class="event-badge">Weekly</span></td>
+            </tr>
+            <tr>
+              <td>Saturday</td>
+              <td>10am – 5pm</td>
+              <td>Winter Park Farmers Market</td>
+              <td>Winter Park</td>
+              <td><span class="event-badge challenge">Challenge Day 🔥</span></td>
+            </tr>
+            <tr>
+              <td>Saturday</td>
+              <td>6pm – 10pm</td>
+              <td>Mills 50 District (Rotating)</td>
+              <td>Orlando</td>
+              <td><span class="event-badge">Weekly</span></td>
+            </tr>
+            <tr>
+              <td>Sunday</td>
+              <td>12pm – 5pm</td>
+              <td>Ivanhoe Village Market</td>
+              <td>Orlando</td>
+              <td><span class="event-badge">Bi-Weekly</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT FORM ── -->
+  <section style="background: var(--hell-black); padding: 6rem 2rem;">
+    <div class="section-inner">
+      <div class="contact-grid">
+
+        <div class="fade-up">
+          <p class="section-label">Book Us or Say Hi</p>
+          <h2 class="section-title">Send a Message</h2>
+          <div class="section-divider"></div>
+          <p style="color:var(--hell-cream); opacity:0.75; font-size:0.9rem;">Whether you want to book us for a private event, ask about catering, or just want to tell us about your Grim Weeper experience — use this form. We typically respond within 24–48 hours.</p>
+          <br>
+          <p style="color:var(--hell-cream); opacity:0.75; font-size:0.9rem;"><strong style="color:var(--hell-gold);">Private Events:</strong> We're available for birthday parties, corporate events, food festivals, wedding receptions, and more. Minimum booking is 2 hours.</p>
+          <br>
+          <p style="color:var(--hell-cream); opacity:0.75; font-size:0.9rem;"><strong style="color:var(--hell-gold);">Challenge Inquiries:</strong> Want to organize a group challenge? We can set up a dedicated Grim Weeper event with advance notice.</p>
+        </div>
+
+        <div class="contact-form fade-up">
+          <h3 style="font-family:var(--font-display); font-size:1.8rem; color:var(--hell-gold); margin-bottom:1.5rem;">Contact Us</h3>
+
+          <form id="contactForm" onsubmit="handleFormSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="firstName">First Name</label>
+                <input type="text" id="firstName" class="form-input" placeholder="Derek" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="lastName">Last Name</label>
+                <input type="text" id="lastName" class="form-input" placeholder="Wolf" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="email">Email Address</label>
+              <input type="email" id="email" class="form-input" placeholder="you@example.com" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="phone">Phone Number</label>
+              <input type="tel" id="phone" class="form-input" placeholder="(407) 555-0000">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="inquiry">Type of Inquiry</label>
+              <select id="inquiry" class="form-select" required>
+                <option value="" disabled selected>Select one...</option>
+                <option value="private-event">Private Event Booking</option>
+                <option value="corporate">Corporate Catering</option>
+                <option value="challenge">Group Challenge Event</option>
+                <option value="wedding">Wedding / Reception</option>
+                <option value="festival">Festival / Market Inquiry</option>
+                <option value="general">General Question</option>
+                <option value="grim-weeper">Tell You About My Grim Weeper Experience</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="message">Message</label>
+              <textarea id="message" class="form-textarea" placeholder="Tell us about your event, date, expected attendance, or just say hi..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width:100%; text-align:center;">Send Message 🔥</button>
+
+            <div class="form-success" id="formSuccess">
+              🔥 Message received! We'll get back to you within 24–48 hours.
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section style="background: var(--hell-dark); padding: 6rem 2rem;">
+    <div class="section-inner" style="max-width:800px;">
+      <p class="section-label fade-up" style="text-align:center;">Got Questions?</p>
+      <h2 class="section-title fade-up" style="text-align:center;">FAQ</h2>
+      <div class="section-divider fade-up" style="margin:0 auto 2.5rem;"></div>
+
+      <div class="fade-up" id="faqContainer">
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Where exactly is your cart located?
+            <span class="faq-chevron">▶</span>
+          </button>
+          <div class="faq-answer">
+            <p>We're a mobile vendor, so our location changes daily. The most reliable way to find us is to follow @HotDogHell on Instagram and TikTok — we post our location every morning we're out. Our schedule above covers our regular weekly spots, but special events happen frequently.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Can I pre-order or order online?
+            <span class="faq-chevron">▶</span>
+          </button>
+          <div class="faq-answer">
+            <p>Currently we're a walk-up cart only — no pre-orders or online ordering. For private events, we'll set up ordering arrangements specific to your event. Online ordering is something we're exploring for the future.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            How do I book you for a private event?
+            <span class="faq-chevron">▶</span>
+          </button>
+          <div class="faq-answer">
+            <p>Use the contact form above or email hello@hotdoghell.com. Include your event date, approximate number of guests, duration, and location. We'll get back to you within 24–48 hours with availability and pricing. We recommend reaching out at least 4–6 weeks in advance for larger events.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Do I have to sign the waiver just to eat regular menu items?
+            <span class="faq-chevron">▶</span>
+          </button>
+          <div class="faq-answer">
+            <p>No — the waiver is only required to participate in the Grim Weeper Challenge. All other menu items, including our spiciest heat-seeker options, are available without any paperwork. The waiver is specifically for the timed challenge format with the extreme capsaicin-extract dog.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            What if I have a food allergy?
+            <span class="faq-chevron">▶</span>
+          </button>
+          <div class="faq-answer">
+            <p>Please let us know before ordering. We can tell you exactly what's in each item. We cannot guarantee a fully allergy-free environment as all items are prepared in a shared space, but we take care to communicate ingredients accurately. If you have a severe allergy to peppers or capsaicin, please do not attempt any of our heat-tier items.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            What payment methods do you accept?
+            <span class="faq-chevron">▶</span>
+          </button>
+          <div class="faq-answer">
+            <p>We accept all major credit and debit cards, Apple Pay, Google Pay, and cash. We always have change. Card is fastest during busy periods.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Do you ever run out of the challenge dog?
+            <span class="faq-chevron">▶</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. The Grim Weeper challenge is limited to a set number of attempts per event to ensure we can give each challenger proper attention and have a staff member present for the full duration. Challenge slots are first-come, first-served on challenge days. Saturdays at the Winter Park Farmers Market are our primary challenge day.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="assets/images/logo.png" alt="Hot Dog Hell">
+          <p>Orlando's premier mobile gourmet hot dog experience. Born in fire, served with pride.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="challenge.html">The Challenge</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Find Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Follow the Heat</h4>
+          <ul>
+            <li><a href="#">@HotDogHell (Instagram)</a></li>
+            <li><a href="#">@HotDogHell (TikTok)</a></li>
+            <li><a href="#">HotDogHell.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copyright">© 2026 Hot Dog Hell, LLC. All rights reserved. Orlando, FL.</span>
+        <span class="footer-tagline">🔥 Dare to Enter the Inferno</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!wasOpen) item.classList.add('open');
+      });
+    });
+
+    // Form submit
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      setTimeout(() => {
+        document.getElementById('formSuccess').style.display = 'block';
+        e.target.reset();
+        btn.textContent = 'Send Message 🔥';
+        btn.disabled = false;
+      }, 1200);
+    }
+  </script>
+</body>
+</html>

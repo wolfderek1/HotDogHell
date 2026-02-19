@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Grim Weeper Challenge — Hot Dog Hell's legendary spicy food challenge. Carolina Reaper, Trinidad Scorpion, Ghost Pepper. 5 minutes. No drinks. Sign the waiver and enter the inferno.">
+  <title>The Grim Weeper Challenge | Hot Dog Hell</title>
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* ── CHALLENGE PAGE EXTRAS ── */
+    .challenge-hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 2rem 80px;
+      overflow: hidden;
+    }
+
+    .challenge-hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 50% 100%, rgba(204,17,0,0.4) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 50% at 20% 100%, rgba(232,93,4,0.3) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 50% at 80% 100%, rgba(232,93,4,0.3) 0%, transparent 60%),
+        var(--hell-black);
+    }
+
+    .challenge-hero-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4rem;
+      max-width: 1200px;
+      width: 100%;
+      align-items: center;
+    }
+
+    .challenge-big-title {
+      font-family: var(--font-display);
+      font-size: clamp(4.5rem, 12vw, 9rem);
+      line-height: 0.85;
+      color: var(--hell-red);
+      text-shadow: 0 0 40px rgba(204,17,0,0.5), 4px 4px 0 var(--hell-brown);
+      margin-bottom: 1rem;
+    }
+
+    .scoville-callout {
+      display: inline-block;
+      background: var(--hell-red);
+      padding: 0.4rem 1rem;
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--hell-white);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Countdown */
+    .countdown-container {
+      background: rgba(204,17,0,0.1);
+      border: 1px solid rgba(204,17,0,0.4);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      text-align: center;
+    }
+
+    .countdown-label {
+      font-family: var(--font-heading);
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--hell-orange);
+      margin-bottom: 0.75rem;
+    }
+
+    #countdown {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      align-items: baseline;
+    }
+
+    .countdown-unit {
+      text-align: center;
+    }
+
+    .countdown-unit strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 3rem;
+      color: var(--hell-gold);
+      line-height: 1;
+    }
+
+    .countdown-unit em {
+      font-family: var(--font-heading);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--hell-cream);
+      opacity: 0.5;
+      font-style: normal;
+    }
+
+    .countdown-sep {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: var(--hell-red);
+      opacity: 0.5;
+      padding-bottom: 0.5rem;
+    }
+
+    /* Pepper breakdown */
+    .peppers-section { background: var(--hell-brown); }
+
+    .pepper-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .pepper-card {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(232,93,4,0.2);
+      padding: 1.5rem;
+      text-align: center;
+      transition: all var(--transition);
+    }
+
+    .pepper-card:hover {
+      border-color: var(--hell-orange);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+
+    .pepper-emoji { font-size: 2.5rem; display: block; margin-bottom: 0.75rem; }
+
+    .pepper-name {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--hell-gold);
+      margin-bottom: 0.3rem;
+      line-height: 1.1;
+    }
+
+    .pepper-scoville {
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--hell-orange);
+      margin-bottom: 0.75rem;
+    }
+
+    .pepper-desc {
+      font-size: 0.8rem;
+      color: var(--hell-cream);
+      opacity: 0.65;
+      line-height: 1.6;
+      max-width: none;
+    }
+
+    /* Waiver section */
+    .waiver-section { background: var(--hell-black); }
+
+    .waiver-box {
+      background: rgba(204,17,0,0.05);
+      border: 2px solid rgba(204,17,0,0.3);
+      padding: 2.5rem;
+      max-width: 800px;
+      margin: 2rem auto 0;
+    }
+
+    .waiver-box h3 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: var(--hell-red);
+      margin-bottom: 1rem;
+    }
+
+    .waiver-excerpt {
+      font-family: var(--font-heading);
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      color: var(--hell-cream);
+      opacity: 0.7;
+      line-height: 1.8;
+      border-left: 3px solid var(--hell-red);
+      padding-left: 1.25rem;
+      margin: 1.5rem 0;
+      max-width: none;
+    }
+
+    /* Hall of Flame */
+    .hall-of-flame { background: var(--hell-dark); }
+
+    .hall-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .hall-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(92,40,0,0.4);
+      padding: 1.25rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .hall-rank {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      color: var(--hell-orange);
+      opacity: 0.15;
+      position: absolute;
+      top: 0.5rem;
+      right: 0.75rem;
+      line-height: 1;
+    }
+
+    .hall-name {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--hell-gold);
+      margin-bottom: 0.25rem;
+    }
+
+    .hall-time {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--hell-orange);
+    }
+
+    .hall-date {
+      font-size: 0.7rem;
+      color: var(--hell-cream);
+      opacity: 0.4;
+      font-family: var(--font-heading);
+      letter-spacing: 0.1em;
+    }
+
+    @media (max-width: 900px) {
+      .challenge-hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .challenge-hero-inner .challenge-image { order: -1; }
+      .challenge-hero-inner .challenge-image img { max-width: 380px; margin: 0 auto; display: block; }
+      .challenge-big-title { font-size: clamp(3.5rem, 12vw, 6rem); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ── -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/images/logo.png" alt="Hot Dog Hell Logo">
+      <div class="nav-logo-text">
+        Hot Dog Hell
+        <span>Est. 2026 · Orlando, FL</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="challenge.html">The Challenge</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Find Us</a></li>
+      <li><a href="challenge.html" class="nav-cta">Accept the Challenge</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-nav">
+    <a href="index.html">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="challenge.html">The Challenge</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Find Us</a>
+  </div>
+
+  <!-- ── CHALLENGE HERO ── -->
+  <div class="challenge-hero">
+    <div class="challenge-hero-bg"></div>
+    <div class="challenge-hero-inner">
+
+      <div class="fade-up">
+        <span class="scoville-callout">2,000,000+ Scoville Heat Units</span>
+        <h1 class="challenge-big-title">The<br>Grim<br>Weeper</h1>
+        <p style="color:var(--hell-cream); opacity:0.8; margin-bottom:2rem; font-size:1.05rem;">
+          Orlando's most feared food challenge. One dog. Five minutes. No drinks. Every single person who has ever attempted this has cried — literally. Will you be the one who walks away dry-eyed?
+        </p>
+
+        <div class="countdown-container">
+          <p class="countdown-label">🔥 Next Challenge Event</p>
+          <div id="countdown"></div>
+        </div>
+
+        <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="openModal('waiverModal')">Sign the Waiver &amp; Enter</button>
+          <a href="#rules" class="btn btn-ghost">Read the Rules First</a>
+        </div>
+      </div>
+
+      <div class="challenge-image fade-up">
+        <img src="assets/images/grim_weeper_flyer.png" alt="The Grim Weeper Challenge Flyer">
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── TAGLINE STRIP ── -->
+  <div class="tagline-strip">
+    <div class="tagline-track">
+      <span>No Drinks Allowed</span><span class="dot">🌶️</span>
+      <span>5 Minute Clock</span><span class="dot">🌶️</span>
+      <span>Sign the Waiver</span><span class="dot">🌶️</span>
+      <span>Over 2 Million Scoville</span><span class="dot">🌶️</span>
+      <span>The Grim Weeper</span><span class="dot">🌶️</span>
+      <span>Dare to Enter the Inferno</span><span class="dot">🌶️</span>
+      <span>No Drinks Allowed</span><span class="dot">🌶️</span>
+      <span>5 Minute Clock</span><span class="dot">🌶️</span>
+      <span>Sign the Waiver</span><span class="dot">🌶️</span>
+      <span>Over 2 Million Scoville</span><span class="dot">🌶️</span>
+      <span>The Grim Weeper</span><span class="dot">🌶️</span>
+      <span>Dare to Enter the Inferno</span><span class="dot">🌶️</span>
+    </div>
+  </div>
+
+  <!-- ── THE RULES ── -->
+  <section id="rules" class="challenge-section">
+    <div class="section-inner">
+      <div class="challenge-grid">
+        <div class="fade-up">
+          <p class="section-label">The Law of the Inferno</p>
+          <h2 class="section-title">Rules &amp;<br>Prizes</h2>
+          <div class="section-divider"></div>
+
+          <ul class="challenge-rules">
+            <li>
+              <span class="rule-icon">📋</span>
+              <div>
+                <strong>Sign the Waiver First</strong>
+                You must complete and sign our Spicy Dog Challenge Waiver before we will prepare your dog. Non-negotiable. Legally binding. Read it.
+              </div>
+            </li>
+            <li>
+              <span class="rule-icon">🎂</span>
+              <div>
+                <strong>18+ Only</strong>
+                Valid government-issued ID required. We verify. No exceptions, even if you look like you can handle it.
+              </div>
+            </li>
+            <li>
+              <span class="rule-icon">⏱️</span>
+              <div>
+                <strong>5-Minute Time Limit</strong>
+                The entire dog — bun and all — must be consumed in 5 minutes or fewer. Clock starts when you take your first bite.
+              </div>
+            </li>
+            <li>
+              <span class="rule-icon">🚱</span>
+              <div>
+                <strong>No Beverages</strong>
+                Zero drinks during the challenge. This includes water, milk, soda, and anything else. Drinks available immediately upon completion or forfeit.
+              </div>
+            </li>
+            <li>
+              <span class="rule-icon">📵</span>
+              <div>
+                <strong>No Leaving the Challenge Area</strong>
+                You stay in the designated challenge zone for the full duration. Walking away ends your attempt.
+              </div>
+            </li>
+            <li>
+              <span class="rule-icon">🏆</span>
+              <div>
+                <strong>Prizes for Completion</strong>
+                Exclusive Hot Dog Hell Grim Weeper T-Shirt, an immortalized photo on our Wall of Flames, and eternal bragging rights.
+              </div>
+            </li>
+          </ul>
+
+          <div class="warning-box">
+            <strong>⚠ Medical Notice:</strong> If you have cardiovascular conditions, gastrointestinal disorders, allergies to peppers or capsaicin, respiratory conditions, or are pregnant — do not attempt this challenge. Please consult a physician before participation.
+          </div>
+        </div>
+
+        <div class="fade-up" style="display:flex; flex-direction:column; gap:1.5rem;">
+
+          <!-- Trophy card -->
+          <div style="background:var(--hell-dark); border:1px solid rgba(244,166,35,0.3); border-top:3px solid var(--hell-gold); padding:2rem; text-align:center;">
+            <div style="font-size:3rem; margin-bottom:0.5rem;">🏆</div>
+            <h3 style="font-family:var(--font-display); font-size:1.8rem; color:var(--hell-gold); margin-bottom:0.5rem;">Winner's Prize</h3>
+            <p style="color:var(--hell-cream); opacity:0.8; font-size:0.9rem; max-width:none;">
+              Exclusive Grim Weeper T-Shirt (signed by the founders) · Hall of Flames photo permanently displayed · Bragging rights that cannot be purchased
+            </p>
+          </div>
+
+          <!-- Stats card -->
+          <div style="background:var(--hell-dark); border:1px solid rgba(92,40,0,0.5); padding:2rem;">
+            <h4 style="font-family:var(--font-heading); font-size:0.75rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--hell-orange); margin-bottom:1.25rem;">Challenge Statistics</h4>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+              <div style="text-align:center;">
+                <span style="font-family:var(--font-display); font-size:2.5rem; color:var(--hell-orange); display:block;">87%</span>
+                <span style="font-family:var(--font-heading); font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--hell-cream); opacity:0.5;">Failure Rate</span>
+              </div>
+              <div style="text-align:center;">
+                <span style="font-family:var(--font-display); font-size:2.5rem; color:var(--hell-gold); display:block;">2M+</span>
+                <span style="font-family:var(--font-heading); font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--hell-cream); opacity:0.5;">Scoville Units</span>
+              </div>
+              <div style="text-align:center;">
+                <span style="font-family:var(--font-display); font-size:2.5rem; color:var(--hell-red); display:block;">5</span>
+                <span style="font-family:var(--font-heading); font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--hell-cream); opacity:0.5;">Minutes on Clock</span>
+              </div>
+              <div style="text-align:center;">
+                <span style="font-family:var(--font-display); font-size:2.5rem; color:var(--hell-fire); display:block;">100%</span>
+                <span style="font-family:var(--font-heading); font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--hell-cream); opacity:0.5;">Tear Rate</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── THE PEPPERS ── -->
+  <section class="peppers-section">
+    <div class="section-inner">
+      <p class="section-label fade-up">What's Inside</p>
+      <h2 class="section-title fade-up">The Pepper<br>Lineup</h2>
+      <div class="section-divider fade-up"></div>
+
+      <div class="pepper-grid stagger-children">
+
+        <div class="pepper-card">
+          <span class="pepper-emoji">🌶️</span>
+          <div class="pepper-name">Carolina Reaper</div>
+          <div class="pepper-scoville">1,400,000–2,200,000 SHU</div>
+          <p class="pepper-desc">The world's hottest pepper (Guinness-certified). Fruity flavor profile that immediately gives way to an overwhelming, sustained burn. Created by Smokin' Ed Curlin.</p>
+        </div>
+
+        <div class="pepper-card">
+          <span class="pepper-emoji">🔥</span>
+          <div class="pepper-name">Trinidad Scorpion</div>
+          <div class="pepper-scoville">1,200,000–2,000,000 SHU</div>
+          <p class="pepper-desc">Named for its scorpion-tail tip, this Caribbean pepper delivers a slow-building inferno with a brief sweet note before absolute destruction sets in.</p>
+        </div>
+
+        <div class="pepper-card">
+          <span class="pepper-emoji">👻</span>
+          <div class="pepper-name">Ghost Pepper (Bhut Jolokia)</div>
+          <div class="pepper-scoville">850,000–1,050,000 SHU</div>
+          <p class="pepper-desc">Once the world's hottest pepper, the ghost pepper brings intense, delayed heat that builds long after you swallow. The burn lasts 20+ minutes.</p>
+        </div>
+
+        <div class="pepper-card">
+          <span class="pepper-emoji">💀</span>
+          <div class="pepper-name">Da Bomb Beyond Insanity</div>
+          <div class="pepper-scoville">135,600 SHU Extract</div>
+          <p class="pepper-desc">Don't let the number fool you — this concentrated extract sauce is known for its synthetic, sharp, instant burn that hits like a freight train with zero warning.</p>
+        </div>
+
+        <div class="pepper-card">
+          <span class="pepper-emoji">⚗️</span>
+          <div class="pepper-name">Pure Capsaicin Extract</div>
+          <div class="pepper-scoville">16,000,000 SHU</div>
+          <p class="pepper-desc">A measured drop of pure capsaicin extract — the compound that makes peppers hot — applied to the finished dog. This is what pushes the Grim Weeper into legend territory.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HALL OF FLAME ── -->
+  <section class="hall-of-flame" id="hall">
+    <div class="section-inner">
+      <p class="section-label fade-up">The Brave & The Few</p>
+      <h2 class="section-title fade-up">Hall of Flames</h2>
+      <div class="section-divider fade-up"></div>
+      <p style="color:var(--hell-cream); opacity:0.7; margin-bottom:1rem; font-size:0.95rem;" class="fade-up">These are the challengers who faced the Grim Weeper and walked away victorious. We salute them — and worry about their digestive systems.</p>
+
+      <div class="hall-grid stagger-children">
+        <div class="hall-card">
+          <span class="hall-rank">1</span>
+          <div class="hall-name">Jess R.</div>
+          <div class="hall-time">3:47</div>
+          <div class="hall-date">March 2026</div>
+        </div>
+        <div class="hall-card">
+          <span class="hall-rank">2</span>
+          <div class="hall-name">Tony "Iron Gut" M.</div>
+          <div class="hall-time">4:12</div>
+          <div class="hall-date">March 2026</div>
+        </div>
+        <div class="hall-card">
+          <span class="hall-rank">3</span>
+          <div class="hall-name">Sarah K.</div>
+          <div class="hall-time">4:31</div>
+          <div class="hall-date">April 2026</div>
+        </div>
+        <div class="hall-card">
+          <span class="hall-rank">4</span>
+          <div class="hall-name">Marcus "The Volcano" D.</div>
+          <div class="hall-time">4:58</div>
+          <div class="hall-date">April 2026</div>
+        </div>
+        <div class="hall-card" style="border-style:dashed; display:flex; align-items:center; justify-content:center; min-height:120px;">
+          <div style="text-align:center; color:var(--hell-orange); opacity:0.4;">
+            <div style="font-size:2rem; margin-bottom:0.25rem;">?</div>
+            <div style="font-family:var(--font-heading); font-size:0.7rem; letter-spacing:0.15em;">Your Name Here</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WAIVER SECTION ── -->
+  <section class="waiver-section" id="waiver">
+    <div class="section-inner">
+      <p class="section-label fade-up" style="text-align:center;">Legal Stuff</p>
+      <h2 class="section-title fade-up" style="text-align:center;">The Waiver</h2>
+      <div class="section-divider fade-up" style="margin:0 auto 2rem;"></div>
+
+      <div class="waiver-box fade-up">
+        <h3>⚠️ Read Before You Sign</h3>
+        <p style="color:var(--hell-cream); opacity:0.8; font-size:0.9rem; max-width:none; margin-bottom:1rem;">
+          The Spicy Dog Challenge Waiver is a legally binding document. Before clicking "Accept," you should understand what you're agreeing to. Here's a plain-English summary of the key terms:
+        </p>
+
+        <div class="waiver-excerpt">
+          <strong style="color:var(--hell-red-hot); display:block; margin-bottom:0.5rem;">You assume ALL risks.</strong>
+          Known, unknown, foreseeable, and unforeseeable risks — including but not limited to intense pain, gastrointestinal distress, cardiovascular stress, esophageal events, allergic reactions, seizure, stroke, and death.
+        </div>
+
+        <div class="waiver-excerpt">
+          <strong style="color:var(--hell-red-hot); display:block; margin-bottom:0.5rem;">You release Hot Dog Hell, LLC from liability.</strong>
+          Including ordinary and gross negligence. Florida law permits this release for voluntary challenge activities where risks are fully disclosed.
+        </div>
+
+        <div class="waiver-excerpt">
+          <strong style="color:var(--hell-red-hot); display:block; margin-bottom:0.5rem;">You grant us media rights.</strong>
+          By participating, you authorize us to photograph and video record you and to use that content in perpetuity for marketing purposes — at no compensation to you.
+        </div>
+
+        <div class="waiver-excerpt">
+          <strong style="color:var(--hell-red-hot); display:block; margin-bottom:0.5rem;">You agree to pay your own medical bills.</strong>
+          If you require emergency treatment, it's on you. We can authorize care; we cannot pay for it.
+        </div>
+
+        <p style="color:var(--hell-cream); opacity:0.65; font-size:0.8rem; margin-top:1.5rem; max-width:none; font-family:var(--font-heading); letter-spacing:0.05em; line-height:1.8;">
+          This summary is provided for convenience. The full waiver controls. You represent that you have read, understood, and voluntarily agree to all terms. You are at least 18 years old, are not currently under the influence of any substance, do not have contraindicated medical conditions, and are choosing to participate of your own free will.
+        </p>
+
+        <div class="modal-actions">
+          <button class="btn btn-primary" onclick="openModal('waiverModal')">I Understand — Open Full Waiver</button>
+          <a href="contact.html" class="btn btn-ghost">Find Us to Sign In Person</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WAIVER MODAL ── -->
+  <div class="modal-overlay" id="waiverModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('waiverModal')">✕</button>
+      <h2>Spicy Dog Challenge Waiver</h2>
+      <div class="modal-warning">⚠ WARNING — This Is a Legally Binding Agreement</div>
+      <p>By accepting this waiver, you acknowledge that you have read, fully understood, and voluntarily agree to the following terms in their entirety.</p>
+      <p><strong style="color:var(--hell-gold);">You certify that:</strong></p>
+      <p>• You are at least 18 years of age with valid government-issued ID<br>
+      • You are not under the influence of alcohol or any substance<br>
+      • You do not have any contraindicated medical conditions including heart disease, GERD, IBS, Crohn's, hypertension, asthma, diabetes, epilepsy, or pepper/capsaicin allergies<br>
+      • You are not pregnant or breastfeeding<br>
+      • You have been advised to consult a physician before participating</p>
+
+      <p><strong style="color:var(--hell-gold);">You agree that:</strong></p>
+      <p>• You assume all risks — known, unknown, foreseen, or unforeseen — including death<br>
+      • You release Hot Dog Hell, LLC, its members, managers, and employees from all liability including ordinary and gross negligence<br>
+      • You are solely responsible for all medical costs arising from participation<br>
+      • You grant Hot Dog Hell, LLC irrevocable media rights to your name, image, and likeness without compensation<br>
+      • You indemnify and defend Hot Dog Hell, LLC against claims from you, your family, or third parties<br>
+      • Florida law governs; disputes are exclusively in Orange County, FL courts</p>
+
+      <p style="font-size:0.75rem; opacity:0.6; max-width:none; font-family:var(--font-heading); letter-spacing:0.05em;">The full waiver must be signed on-site with a witness present before participation. This digital acceptance confirms you have read and understand the terms. The physical document controls all legal obligations.</p>
+
+      <div class="modal-actions">
+        <button class="btn btn-primary" onclick="alert('Please sign the physical waiver at our location before participating. See you at the cart!'); closeModal('waiverModal')">Accept &amp; Proceed to In-Person Signing</button>
+        <button class="btn btn-ghost" onclick="closeModal('waiverModal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="assets/images/logo.png" alt="Hot Dog Hell">
+          <p>Orlando's premier mobile gourmet hot dog experience. Born in fire, served with pride.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="challenge.html">The Challenge</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Find Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>The Challenge</h4>
+          <ul>
+            <li><a href="#rules">Rules</a></li>
+            <li><a href="#waiver">Waiver Info</a></li>
+            <li><a href="#hall">Hall of Flames</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copyright">© 2026 Hot Dog Hell, LLC. All rights reserved. Orlando, FL.</span>
+        <span class="footer-tagline">🔥 Dare to Enter the Inferno</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

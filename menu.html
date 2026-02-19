@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Hot Dog Hell Menu — Gourmet hot dogs from mild to legendary. Orlando's most creative mobile food vendor.">
+  <title>Menu | Hot Dog Hell</title>
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* ── MENU PAGE EXTRAS ── */
+    .menu-page-filter {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .filter-btn {
+      padding: 0.45rem 1.1rem;
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: 1px solid rgba(92, 40, 0, 0.6);
+      background: transparent;
+      color: var(--hell-cream);
+      cursor: pointer;
+      transition: all var(--transition);
+      opacity: 0.7;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--hell-orange);
+      border-color: var(--hell-orange);
+      color: var(--hell-black);
+      opacity: 1;
+    }
+
+    .heat-legend {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      padding: 1rem 1.5rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(92,40,0,0.3);
+    }
+
+    .heat-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--hell-cream);
+      opacity: 0.7;
+    }
+
+    .heat-swatch {
+      width: 10px;
+      height: 18px;
+      border-radius: 2px;
+    }
+
+    .menu-section-header {
+      margin: 3.5rem 0 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(92,40,0,0.4);
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+    }
+
+    .menu-section-header h3 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: var(--hell-orange);
+    }
+
+    .menu-section-header span {
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--hell-cream);
+      opacity: 0.5;
+      text-transform: uppercase;
+    }
+
+    .menu-card-full .menu-card-badges {
+      display: flex;
+      gap: 0.4rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .allergen-note {
+      margin-top: 4rem;
+      padding: 1.5rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(92,40,0,0.3);
+      font-size: 0.8rem;
+      color: var(--hell-cream);
+      opacity: 0.6;
+      line-height: 1.7;
+      max-width: none;
+    }
+
+    .allergen-note strong {
+      color: var(--hell-orange);
+      font-family: var(--font-heading);
+      letter-spacing: 0.1em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ── -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/images/logo.png" alt="Hot Dog Hell Logo">
+      <div class="nav-logo-text">
+        Hot Dog Hell
+        <span>Est. 2026 · Orlando, FL</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="challenge.html">The Challenge</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Find Us</a></li>
+      <li><a href="challenge.html" class="nav-cta">Accept the Challenge</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-nav">
+    <a href="index.html">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="challenge.html">The Challenge</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Find Us</a>
+  </div>
+
+  <!-- ── PAGE HERO ── -->
+  <div class="page-hero">
+    <p class="section-label">Hot Dog Hell</p>
+    <h1 class="section-title" style="font-size: clamp(3rem, 8vw, 7rem);">The Menu</h1>
+    <p style="color: var(--hell-cream); opacity:0.7; font-family: var(--font-heading); letter-spacing:0.15em; font-size:0.9rem; text-transform:uppercase; margin: 0.75rem auto 0;">Gourmet Craft · Bold Flavors · Real Heat</p>
+  </div>
+
+  <!-- ── MENU CONTENT ── -->
+  <section class="menu-section">
+    <div class="section-inner">
+
+      <!-- Heat Legend -->
+      <div class="heat-legend fade-up">
+        <span style="font-family:var(--font-heading); font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--hell-orange); opacity:1;">Heat Scale:</span>
+        <div class="heat-legend-item">
+          <div class="heat-swatch" style="background: var(--hell-mid);"></div> Mild
+        </div>
+        <div class="heat-legend-item">
+          <div class="heat-swatch" style="background: var(--hell-fire);"></div> Medium
+        </div>
+        <div class="heat-legend-item">
+          <div class="heat-swatch" style="background: var(--hell-orange);"></div> Hot
+        </div>
+        <div class="heat-legend-item">
+          <div class="heat-swatch" style="background: var(--hell-red);"></div> Very Hot
+        </div>
+        <div class="heat-legend-item" style="animation: pipFlicker 0.5s ease-in-out infinite alternate;">
+          <div class="heat-swatch" style="background: var(--hell-red-hot); box-shadow: 0 0 8px red;"></div> Send Help
+        </div>
+      </div>
+
+      <!-- Signature Dogs -->
+      <div class="menu-section-header fade-up">
+        <h3>Signature Dogs</h3>
+        <span>Our Craft Creations</span>
+      </div>
+
+      <div class="menu-grid stagger-children">
+
+        <div class="menu-card">
+          <div class="menu-card-badge">Flagship</div>
+          <div class="menu-card-name">The Inferno Classic</div>
+          <p class="menu-card-desc">All-beef Vienna-style dog on a toasted brioche bun. Topped with smoky chipotle aioli, house jalapeño-cabbage slaw, and our signature slow-burn fire sauce. The gateway drug.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">$9</span>
+            <div class="heat-meter" data-heat="2"></div>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-badge">⭐ Most Ordered</div>
+          <div class="menu-card-name">Brimstone BBQ</div>
+          <p class="menu-card-desc">Smoked andouille sausage with slow-cooked brisket baked beans, crispy fried tobacco onions, house pickles, and a smoked paprika-bourbon BBQ drizzle. Pure Southern soul.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">$11</span>
+            <div class="heat-meter" data-heat="1"></div>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-badge">Garden Party</div>
+          <div class="menu-card-name">The Devil's Garden</div>
+          <p class="menu-card-desc">Jumbo bratwurst with roasted garlic herb cream cheese, oil-packed sun-dried tomatoes, fresh arugula, shaved parmesan, and aged balsamic on an everything sesame bun.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">$10</span>
+            <div class="heat-meter" data-heat="0"></div>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-badge">🌮 New</div>
+          <div class="menu-card-name">Hellfire Elote</div>
+          <p class="menu-card-desc">Mexican street corn meets hot dog. All-beef frank with cotija cheese, Mexican crema, fresh corn salsa, chili-lime seasoning, a hit of tajín, and cilantro on a soft bolillo roll.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">$11</span>
+            <div class="heat-meter" data-heat="2"></div>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-badge">Fan Fave</div>
+          <div class="menu-card-name">Purgatory Reuben</div>
+          <p class="menu-card-desc">All-beef frank on a griddled marble rye with house-made corned beef kraut, Swiss cheese sauce, whole grain mustard, and Russian dressing. A deli crime committed in the best way.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">$12</span>
+            <div class="heat-meter" data-heat="1"></div>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-badge">🥓 Decadent</div>
+          <div class="menu-card-name">Diablo Bacon Jam</div>
+          <p class="menu-card-desc">Smoked kielbasa with house bacon jam (slow-cooked with brown sugar, whiskey, and ghost pepper), sharp white cheddar, and chive cream cheese on a pretzel bun.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">$13</span>
+            <div class="heat-meter" data-heat="3"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Heat Seekers -->
+      <div class="menu-section-header fade-up">
+        <h3>🔥 Heat Seekers</h3>
+        <span>Proceed With Caution</span>
+      </div>
+
+      <div class="menu-grid stagger-children">
+
+        <div class="menu-card">
+          <div class="menu-card-badge">🔥 Hot</div>
+          <div class="menu-card-name">Seventh Circle</div>
+          <p class="menu-card-desc">Ghost pepper-infused pork sausage, habanero mango salsa, scorpion pepper cheese sauce, pickled red onion, and a jalapeño-infused olive oil drizzle on a black charcoal bun.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">$13</span>
+            <div class="heat-meter" data-heat="4"></div>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-badge">🔥 Very Hot</div>
+          <div class="menu-card-name">The Reaper's Gate</div>
+          <p class="menu-card-desc">Carolina Reaper sausage, reaper pepper relish, scorpion salt crust, habanero mustard, and pure ghost pepper sauce. Last warning before the Grim Weeper territory.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">$14</span>
+            <div class="heat-meter" data-heat="4"></div>
+          </div>
+        </div>
+
+        <div class="menu-card" style="border-top-color: var(--hell-red);">
+          <div class="menu-card-badge" style="background:var(--hell-red);">☠️ Challenge</div>
+          <div class="menu-card-name" style="color:var(--hell-red);">Grim Weeper</div>
+          <p class="menu-card-desc">The one. Carolina Reaper, Trinidad Scorpion pepper, ghost pepper extract, Da Bomb Beyond Insanity sauce, and concentrated capsaicin extract. <strong style="color:var(--hell-red)">Waiver required. Milk not provided.</strong></p>
+          <div class="menu-card-footer">
+            <span class="menu-price" style="color:var(--hell-red);">$15</span>
+            <div class="heat-meter" data-heat="5"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sides & Drinks -->
+      <div class="menu-section-header fade-up">
+        <h3>Sides & Drinks</h3>
+        <span>The Supporting Cast</span>
+      </div>
+
+      <div class="menu-grid stagger-children">
+
+        <div class="menu-card">
+          <div class="menu-card-name" style="font-size:1.5rem;">Hell Fries</div>
+          <p class="menu-card-desc">Crispy hand-cut fries tossed in our house hell spice blend — paprika, cayenne, garlic, and brown sugar. Addictive.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">$5</span>
+            <div class="heat-meter" data-heat="2"></div>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-name" style="font-size:1.5rem;">Loaded Hell Fries</div>
+          <p class="menu-card-desc">Hell Fries smothered in scorpion pepper cheese sauce, jalapeño bacon bits, pickled jalapeños, and chipotle sour cream.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">$8</span>
+            <div class="heat-meter" data-heat="3"></div>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-name" style="font-size:1.5rem;">Drinks</div>
+          <p class="menu-card-desc">Canned sodas, sparkling water, and bottled water. (Milk and milk products are NOT available at the challenge station — that's the point.)</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">$2–3</span>
+            <div class="heat-meter" data-heat="0"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Allergen Note -->
+      <div class="allergen-note fade-up">
+        <strong>Allergen & Dietary Notice:</strong> Menu items may contain wheat, dairy, eggs, soy, and tree nuts. All hot dogs contain meat and are not vegetarian or vegan. Items marked "ghost pepper", "scorpion", or "reaper" contain capsaicin levels that may cause severe physiological reactions in sensitive individuals. Please inform our staff of any dietary restrictions or allergies. Consuming our extreme heat items during or after certain medications may intensify reactions — consult your physician before attempting any challenge items. Hot Dog Hell, LLC is not responsible for... well, anything once you've signed the waiver.
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="assets/images/logo.png" alt="Hot Dog Hell">
+          <p>Orlando's premier mobile gourmet hot dog experience. Born in fire, served with pride.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="challenge.html">The Challenge</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Find Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Follow the Heat</h4>
+          <ul>
+            <li><a href="#">@HotDogHell (Instagram)</a></li>
+            <li><a href="#">@HotDogHell (TikTok)</a></li>
+            <li><a href="#">HotDogHell.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copyright">© 2026 Hot Dog Hell, LLC. All rights reserved. Orlando, FL.</span>
+        <span class="footer-tagline">🔥 Dare to Enter the Inferno</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

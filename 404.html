@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Lost in Hell | Hot Dog Hell</title>
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .error-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      background:
+        radial-gradient(ellipse 60% 60% at 50% 100%, rgba(204,17,0,0.25) 0%, transparent 70%),
+        var(--hell-black);
+    }
+
+    .error-number {
+      font-family: var(--font-display);
+      font-size: clamp(8rem, 25vw, 16rem);
+      line-height: 0.85;
+      color: var(--hell-red);
+      text-shadow: 4px 4px 0 var(--hell-brown), 0 0 60px rgba(204,17,0,0.4);
+      margin-bottom: 1rem;
+    }
+
+    .error-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 5vw, 3rem);
+      color: var(--hell-gold);
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .error-desc {
+      font-size: 1rem;
+      color: var(--hell-cream);
+      opacity: 0.7;
+      max-width: 420px;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    .error-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="error-page">
+    <img src="assets/images/logo.png" alt="Hot Dog Hell" style="width:100px; height:100px; object-fit:contain; margin-bottom:2rem; filter:drop-shadow(0 0 20px rgba(232,93,4,0.5));">
+    <div class="error-number">404</div>
+    <h1 class="error-title">Lost in the Inferno</h1>
+    <p class="error-desc">You've wandered somewhere that doesn't exist — not even in Hell. This page is hotter than a ghost pepper but also entirely missing. Let's get you back to somewhere real.</p>
+    <div class="error-actions">
+      <a href="index.html" class="btn btn-primary">Back to Home</a>
+      <a href="menu.html" class="btn btn-secondary">See the Menu</a>
+      <a href="challenge.html" class="btn btn-ghost">Take the Challenge</a>
+    </div>
+  </div>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
