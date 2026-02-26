@@ -316,6 +316,7 @@ body::before {
   text-transform: uppercase;
   color: var(--hell-orange);
   margin-bottom: 0.75rem;
+  text-align: center;
 }
 
 .hero-title {
